@@ -13,7 +13,7 @@ Run the `main.exe` file from the directory in which you save this. The terminal 
 The format for the puzzle files is a .txt file containing 3-integer sets where the integers represent:\
 `x y val`
 
-where `x` is the x-coordinate (1-9) of the cell you're instructing the program to fill, `y` is the y-coordinate (1-9) and `val` is the value (1-9) you want to put in that cell. There should be no header row or other data in the file. For example, the first ten rows of puzzle1.txt look like this:  
+where `x` is the row number (1-9) of the cell you're instructing the program to fill, `y` is the column number (1-9) and `val` is the value (1-9) you want to put in that cell. There should be no header row or other data in the file. For example, the first ten rows of puzzle1.txt look like this:  
 `1 2 6`\
 `1 3 9`\
 `1 5 1`\
