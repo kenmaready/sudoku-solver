@@ -1,25 +1,29 @@
 #include <iostream>
+#include <string>
 #include "Sudoku.h"
 
 using namespace std;
 
 int main() {
-  Sudoku puzzle1 {"puzzle1.txt"};
-  cout << "puzzle1:" << endl;
-  puzzle1.display();
+  string filename {};
 
+  cout << "Please enter the filename for your sudoku puzzle (including .txt extension): ";
+  cin >> filename;
+
+
+  Sudoku puzzle {filename};
   bool loaded {};
-  loaded = puzzle1.load_game();
-
+  loaded = puzzle.load_game();
   if (loaded) {
-    cout << "Your puzzle has been loaded." << endl;
+    cout << "\nYour puzzle has been loaded:" << endl;
   }
 
-  puzzle1.display();
+  puzzle.display();
   bool solved {};
-  solved = puzzle1.solve();
-  if (solved) cout << "puzzle1 has been solved." << endl;
-  puzzle1.show_solution();
+  solved = puzzle.solve();
+  if (solved) cout << "Your puzzle has been solved:" << endl;
+  puzzle.show_solution();
+
 
   return 0;
 }

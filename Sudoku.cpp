@@ -56,13 +56,13 @@ std::vector<int> check_row(const int board [Sudoku::ROWS][Sudoku::COLUMNS], int 
       }
     }
   }
-  std::cout << "remaining valid_numbers (check_rows): ";
-  print_vec(valid_numbers); 
+  // std::cout << "remaining valid_numbers (check_row): ";
+  // print_vec(valid_numbers); 
   
   return valid_numbers;
 }
 
-std::vector<int> check_columns(const int board [Sudoku::ROWS][Sudoku::COLUMNS], int j, std::vector<int> &valid_numbers) {
+std::vector<int> check_column(const int board [Sudoku::ROWS][Sudoku::COLUMNS], int j, std::vector<int> &valid_numbers) {
   for (int x {0}; x < Sudoku::ROWS; x++) {
     int size_y = valid_numbers.size() - 1;
     for (int y {size_y}; y >= 0; y--) {
@@ -72,8 +72,8 @@ std::vector<int> check_columns(const int board [Sudoku::ROWS][Sudoku::COLUMNS], 
       }
     }
   }
-  std::cout << "remaining valid_numbers (check_columns): ";
-  print_vec(valid_numbers); 
+  // std::cout << "remaining valid_numbers (check_column): ";
+  // print_vec(valid_numbers); 
   
   return valid_numbers;
 }
@@ -88,7 +88,7 @@ std::vector<int> find_valid_numbers(int board [Sudoku::ROWS][Sudoku::COLUMNS], i
 
   // check various ways for valid numbers, eliminating non-valid ones:
   valid_numbers = check_row(board, i, valid_numbers);
-  valid_numbers = check_columns(board, j, valid_numbers);
+  valid_numbers = check_column(board, j, valid_numbers);
   
   return valid_numbers;
 }
@@ -183,7 +183,6 @@ bool Sudoku::solve(int board [ROWS][COLUMNS]) {
 }
 
 void Sudoku::show_solution() {
-  std::cout << std::endl << "Solution: " << std::endl;
   display_board(solution);
 }
 

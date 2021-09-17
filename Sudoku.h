@@ -21,7 +21,7 @@ class Sudoku {
   friend void display_board(const int board [ROWS][COLUMNS]);
   friend void copy_board(const int board [ROWS][COLUMNS], int new_board[ROWS][COLUMNS]);
   friend std::vector<int> check_row(const int board [ROWS][COLUMNS], int i, std::vector<int> &valid_numbers);
-  friend std::vector<int> check_columns(const int board [ROWS][COLUMNS], int j, std::vector<int> &valid_numbers);
+  friend std::vector<int> check_column(const int board [ROWS][COLUMNS], int j, std::vector<int> &valid_numbers);
   friend std::vector<int> find_valid_numbers(int board [ROWS][COLUMNS], int i, int j);
 
   public:
