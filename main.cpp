@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <conio.h>
 #include "Sudoku.h"
 
 using namespace std;
@@ -19,6 +20,11 @@ int main() {
   }
 
   puzzle.display();
+
+  cout << "Press any key to solve." << endl;
+
+  while (!kbhit());
+
   bool solved {};
   solved = puzzle.solve();
   if (solved) cout << "Your puzzle has been solved:" << endl;
