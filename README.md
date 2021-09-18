@@ -1,4 +1,4 @@
-# sudoku-solver
+# C++ sudoku-solver
 
 This is a personal project to test myself while learning C++. It's a brute-force sudoku-solver, meaning that it steps through a sudoku puzzle until it finds an empty cell, then checks to find all valid numbers for that cell by knocking out conflicts based on the numbers already in place in the same row and column and within the cell's 3x3 grid. Then it creates a new hypothetical puzzle board with each of those possibilities filled in to the current empty space and then recursively checks all possibilities for the next cell. And so on until an entire board is filled (with unworkable solutions being thrown out along the way) with that board becoming the solution.
 
