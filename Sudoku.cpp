@@ -2,9 +2,6 @@
 #include <iomanip>
 #include "Sudoku.h"
 
-
-
-
 // helper functions:
 void print_vec(std::vector<int> vec) {
   std::cout << "vector < ";
@@ -46,34 +43,47 @@ void display_board(const int board [Sudoku::ROWS][Sudoku::COLUMNS]) {
 }
 
 
-std::vector<int> check_row(const int board [Sudoku::ROWS][Sudoku::COLUMNS], int i, std::vector<int> &valid_numbers) {
+std::vector<int> check_row_and_column(const int board [Sudoku::ROWS][Sudoku::COLUMNS], int i, int j, std::vector<int> &valid_numbers) {
   for (int x {0}; x < Sudoku::COLUMNS; x++) {
     int size_y = valid_numbers.size() - 1;
     for (int y {size_y}; y >= 0; y--) {
-      if (board[x][i] == valid_numbers.at(y)) {
+      if (board[x][i] == valid_numbers.at(y) || board[j][x] == valid_numbers.at(y)) {
         valid_numbers.erase(valid_numbers.begin() + y);
         continue;
       }
     }
   }
-  // std::cout << "remaining valid_numbers (check_row): ";
-  // print_vec(valid_numbers); 
+  // std::cout << "remaining valid_numbers (check_row_and_column): " << print_vec(valid_numebrs) << std::endl;
   
   return valid_numbers;
 }
 
-std::vector<int> check_column(const int board [Sudoku::ROWS][Sudoku::COLUMNS], int j, std::vector<int> &valid_numbers) {
-  for (int x {0}; x < Sudoku::ROWS; x++) {
-    int size_y = valid_numbers.size() - 1;
-    for (int y {size_y}; y >= 0; y--) {
-      if (board[j][x] == valid_numbers.at(y)) {
-        valid_numbers.erase(valid_numbers.begin() + y);
-        continue;
+std::vector<int> check_grid(const int board [Sudoku::ROWS][Sudoku::COLUMNS], int i, int j, std::vector<int> &valid_numbers) {
+  if (valid_numbers.empty()) {
+    return valid_numbers;
+  }
+
+  // determine current grid location (0,0) through (2,2):
+  int grid_vert = j/3;
+  int grid_horiz = i/3;
+
+  // scan grid for conflicts:
+    for (int x{0}; x <=2; x++) {
+      for (int y{0}; y <=2; y++) {
+
+        // loop through remaining numbers in valid_numbers vector:
+        int size_vec = valid_numbers.size() - 1;
+        for (int vec_index{size_vec}; vec_index >=0; vec_index--) {
+
+          if (board[(grid_vert*3) + x][(grid_horiz * 3) + y] == valid_numbers.at(vec_index)) {
+            valid_numbers.erase(valid_numbers.begin() + vec_index);
+            continue;
+          }
+        }
       }
     }
-  }
-  // std::cout << "remaining valid_numbers (check_column): ";
-  // print_vec(valid_numbers); 
+
+  // std::cout << "remaining valid_numbers (check_grid): " << print_vec(valid_numebrs) << std::endl;
   
   return valid_numbers;
 }
@@ -87,8 +97,8 @@ std::vector<int> find_valid_numbers(int board [Sudoku::ROWS][Sudoku::COLUMNS], i
   }
 
   // check various ways for valid numbers, eliminating non-valid ones:
-  valid_numbers = check_row(board, i, valid_numbers);
-  valid_numbers = check_column(board, j, valid_numbers);
+  valid_numbers = check_row_and_column(board, i, j, valid_numbers);
+  valid_numbers = check_grid(board, i, j, valid_numbers);
   
   return valid_numbers;
 }
